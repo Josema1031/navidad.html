@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Felices Fiestas – Sección Gualeguay</title>
+  <!-- ============================== -->
+<!-- 🌐 OPEN GRAPH (Vista previa)   -->
+<!-- ============================== -->
+
+<!-- Título para redes -->
+<meta property="og:title" content="Felices Fiestas – Sección Gualeguay · Gendarmería Nacional">
+
+<!-- Descripción institucional -->
+<meta property="og:description" content="La Sección Gualeguay desea una Navidad colmada de paz y un próspero 2025. Mensaje personalizado para cada destinatario.">
+
+<!-- URL canonical -->
+<meta property="og:url" content="https://josema1031.github.io/navidad.html">
+
+<!-- Tipo de contenido -->
+<meta property="og:type" content="website">
+
+<!-- Imagen de previsualización -->
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/0/0b/Escudo_de_la_Gendarmer%C3%ADa_Nacional_Argentina.svg">
+
+<!-- Tamaño sugerido para mejor preview en redes -->
+<meta property="og:image:width" content="800">
+<meta property="og:image:height" content="800">
+
+<!-- Nombre del sitio -->
+<meta property="og:site_name" content="Sección Gualeguay – Gendarmería Nacional">
+
+
+<!-- ============================== -->
+<!-- 🐦 TWITTER CARDS              -->
+<!-- ============================== -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Felices Fiestas – Sección Gualeguay">
+<meta name="twitter:description" content="Mensaje institucional personalizado. La Sección Gualeguay envía sus saludos de Navidad y Año Nuevo.">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/0/0b/Escudo_de_la_Gendarmer%C3%ADa_Nacional_Argentina.svg">
+
+
+<!-- ============================== -->
+<!-- 📱 MOBILE / WHATSAPP FRIENDLY -->
+<!-- ============================== -->
+<meta name="theme-color" content="#0d2f24">
+<meta name="apple-mobile-web-app-title" content="Felices Fiestas">
+<meta name="format-detection" content="telephone=no">
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0d2f24, #0e3b2c, #124734);
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .gold { color: #d4af37; }
+
+    .logo {
+      width: 140px;
+      margin-top: 40px;
+      filter: drop-shadow(0 0 10px rgba(212,175,55,0.4));
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 38px;
+      margin-top: 25px;
+      margin-bottom: 10px;
+      color:#fff;
+      text-shadow: 0 0 12px rgba(212,175,55,0.45);
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 300;
+      opacity: 0.95;
+      margin-bottom: 30px;
+    }
+
+    .mensaje {
+      max-width: 700px;
+      margin: auto;
+      font-size: 18px;
+      line-height: 1.7;
+      opacity: 0.92;
+      padding: 0 20px;
+    }
+
+    .firma {
+      margin-top: 45px;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #d4af37;
+      font-family: 'Playfair Display', serif;
+      opacity: 0.95;
+    }
+
+    .firma small {
+      font-size: 15px;
+      font-family: 'Poppins', sans-serif;
+      color: #e6d79a;
+    }
+
+    .snow {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbH-9Y-SsII49E1KwMJLZSlHIOXUje3bSv06f2CWMj8Q&s');
+      animation: snowFall 15s linear infinite;
+      opacity: 0.10;
+      z-index: 999;
+    }
+
+    @keyframes snowFall {
+      from { background-position: 0px 0px; }
+      to   { background-position: 0px 1200px; }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 30px; }
+      h2 { font-size: 18px; }
+      .logo { width: 110px; }
+      .mensaje { font-size: 17px; }
+      .firma { font-size: 17px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <img class="logo" src="imag/logo-512.png.jpg">
+
+  <h1 id="titulo"></h1>
+
+  <h2 class="gold">Desde la Sección Gualeguay de  Gendarmería Nacional quiere desearte</h2>
+
+  <p id="mensaje" class="mensaje"></p>
+
+  <div class="firma">
+    Atentamente,<br>
+    <b>JOSE MANUEL CARRIZO</b><br>
+    <small>1er Alférez<br> Jefe de la Sección Gualeguay</small>
+  </div>
+
+  <div class="snow"></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const nombre = (params.get("para") || "Querido Amigo").trim();
+
+    document.getElementById("titulo").innerText =
+      `🎄 ¡Feliz Navidad, ${nombre}! 🎁`;
+
+    // Palabras que indican empresa
+    const palabrasEmpresa = [
+      "empresa", "srl", "sa", "sas", "cooperativa", "distribuidora",
+      "industria", "metalurgica", "comercio", "local","Grupo", "firma"
+    ];
+
+    const esEmpresa = palabrasEmpresa.some(p =>
+      nombre.toLowerCase().includes(p)
+    );
+
+    let mensaje = "";
+
+    if (esEmpresa) {
+      mensaje = `
+        Agradecimiento profundamente por  su colaboración y acompañamiento durante este año.  
+        Valoramos el compromiso brindado a la Sección Gualeguay  
+        y deseamos que la Navidad y el próximo año traigan prosperidad y nuevos logros compartidos.
+      `;
+    } else {
+      mensaje = `
+        Que esta Navidad traiga paz, unión y esperanza a tu hogar.  
+        Gracias por acompañarnos durante este año.  
+        Que el 2026 llegue lleno de salud, prosperidad y momentos inolvidables.
+      `;
+    }
+
+    document.getElementById("mensaje").innerHTML = mensaje;
+  </script>
+
+</body>
+</html>
