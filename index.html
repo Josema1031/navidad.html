@@ -21,7 +21,7 @@
 <meta property="og:type" content="website">
 
 <!-- Imagen de previsualización -->
-<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/0/0b/Escudo_de_la_Gendarmer%C3%ADa_Nacional_Argentina.svg">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Insignia_de_la_Gendarmer%C3%ADa_de_Argentina.svg/1280px-Insignia_de_la_Gendarmer%C3%ADa_de_Argentina.svg.png">
 
 <!-- Tamaño sugerido para mejor preview en redes -->
 <meta property="og:image:width" content="800">
@@ -37,7 +37,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Felices Fiestas – Sección Gualeguay">
 <meta name="twitter:description" content="Mensaje institucional personalizado. La Sección Gualeguay envía sus saludos de Navidad y Año Nuevo.">
-<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/0/0b/Escudo_de_la_Gendarmer%C3%ADa_Nacional_Argentina.svg">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Insignia_de_la_Gendarmer%C3%ADa_de_Argentina.svg/1280px-Insignia_de_la_Gendarmer%C3%ADa_de_Argentina.svg.png">
 
 
 <!-- ============================== -->
@@ -159,38 +159,85 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const nombre = (params.get("para") || "Querido Amigo").trim();
+const nombre = (params.get("para") || "Querido Amigo").trim().toLowerCase();
 
-    document.getElementById("titulo").innerText =
-      `🎄 ¡Feliz Navidad, ${nombre}! 🎁`;
+// Palabras clave por categoría
+const palabrasEmpresa = [
+  "empresa", "srl", "s.r.l", "sa", "s.a", "sas", "s.a.s",
+  "cooperativa", "distribuidora", "industria", "metalurgica",
+  "agropecuaria", "comercio", "local", "firma", "grupo",
+  "servicios", "constructora", "inversiones", "importadora", "exportadora"
+];
 
-    // Palabras que indican empresa
-    const palabrasEmpresa = [
-      "empresa", "srl", "sa", "sas", "cooperativa", "distribuidora",
-      "industria", "metalurgica", "comercio", "local","Grupo", "firma"
-    ];
+const palabrasInstitucionPublica = [
+  "municipalidad", "intendente", "concejo", "senado", "diputados",
+  "ministerio", "secretaría", "dirección", "provincia", "nación",
+  "hospital", "escuela", "juzgado", "registro", "corralón"
+];
 
-    const esEmpresa = palabrasEmpresa.some(p =>
-      nombre.toLowerCase().includes(p)
-    );
+const palabrasFuerzas = [
+  "policía", "gendarmería", "prefectura", "ejército", 
+  "armada", "bomberos", "seguridad", "unidad", "comisaría"
+];
 
-    let mensaje = "";
+const palabrasClub = [
+  "club", "asociación", "liga", "centro", "sociedad", 
+  "agrupación", "fundación"
+];
 
-    if (esEmpresa) {
-      mensaje = `
-        Agradecimiento profundamente por  su colaboración y acompañamiento durante este año.  
-        Valoramos el compromiso brindado a la Sección Gualeguay  
-        y deseamos que la Navidad y el próximo año traigan prosperidad y nuevos logros compartidos.
-      `;
-    } else {
-      mensaje = `
-        Que esta Navidad traiga paz, unión y esperanza a tu hogar.  
-        Gracias por acompañarnos durante este año.  
-        Que el 2026 llegue lleno de salud, prosperidad y momentos inolvidables.
-      `;
-    }
+// Detectores
+const esFuerza = palabrasFuerzas.some(p => nombre.includes(p));
+const esInstitucion = palabrasInstitucionPublica.some(p => nombre.includes(p));
+const esEmpresa = palabrasEmpresa.some(p => nombre.includes(p));
+const esClub = palabrasClub.some(p => nombre.includes(p));
 
-    document.getElementById("mensaje").innerHTML = mensaje;
+// Título (respetando mayúsculas originales)
+const nombreOriginal = (params.get("para") || "Querido Amigo").trim();
+document.getElementById("titulo").innerText =
+  `🎄 ¡Feliz Navidad, ${nombreOriginal}! 🎁`;
+
+// Mensajes por categoría
+let mensaje = "";
+
+if (esFuerza) {
+  mensaje = `
+    Extendemos un cordial saludo institucional en estas fiestas,
+    reconociendo la labor y el compromiso asumido en pos de la seguridad
+    y el servicio a la comunidad. Que la Navidad y el Año Nuevo traigan
+    renovación, paz y bienestar para toda la fuerza.
+  `;
+} 
+else if (esInstitucion) {
+  mensaje = `
+    Agradecemos profundamente el trabajo coordinado y el acompañamiento
+    brindado durante este año. Valoramos el compromiso institucional
+    y deseamos que estas fiestas traigan prosperidad y nuevos logros compartidos.
+  `;
+}
+else if (esEmpresa) {
+  mensaje = `
+    Agradecemos profundamente su colaboración y acompañamiento durante este año.
+    Valoramos el compromiso brindado a la Sección Gualeguay y deseamos que la Navidad
+    y el próximo año traigan prosperidad y nuevos desafíos compartidos.
+  `;
+}
+else if (esClub) {
+  mensaje = `
+    Extendemos un cálido saludo navideño, destacando el rol social, deportivo y
+    comunitario que desarrollan. Que estas fiestas traigan unidad, crecimiento
+    y nuevos logros para toda la institución.
+  `;
+}
+else {
+  mensaje = `
+    Que esta Navidad traiga paz, unión y esperanza a tu hogar.
+    Gracias por acompañarnos durante este año.
+    Que el nuevo año llegue lleno de salud, prosperidad y momentos inolvidables.
+  `;
+}
+
+document.getElementById("mensaje").innerHTML = mensaje;
+
   </script>
 
 </body>
