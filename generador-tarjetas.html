@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de tarjetas – Sección Gualeguay</title>
+  <meta name="theme-color" content="#0d3528">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --verde-oscuro: #081f18;
+      --verde: #0d3528;
+      --verde-claro: #17523f;
+      --dorado: #d4af37;
+      --dorado-claro: #f3df93;
+      --blanco: #ffffff;
+      --borde: rgba(212, 175, 55, .28);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      color: var(--blanco);
+      background:
+        radial-gradient(circle at top, rgba(212,175,55,.16), transparent 30%),
+        linear-gradient(145deg, var(--verde-oscuro), var(--verde), var(--verde-claro));
+    }
+
+    .contenedor {
+      width: min(100% - 24px, 900px);
+      margin: 0 auto;
+      padding: 22px 0 42px;
+    }
+
+    .cabecera {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      width: 90px;
+      display: block;
+      margin: 0 auto 10px;
+      filter: drop-shadow(0 0 12px rgba(212,175,55,.25));
+    }
+
+    h1 {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 7vw, 42px);
+      line-height: 1.1;
+    }
+
+    .cabecera p {
+      margin: 10px auto 0;
+      max-width: 650px;
+      color: rgba(255,255,255,.82);
+      font-size: 15px;
+    }
+
+    .panel {
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--borde);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 16px 36px rgba(0,0,0,.24);
+      backdrop-filter: blur(8px);
+      margin-bottom: 18px;
+    }
+
+    .panel h2 {
+      margin: 0 0 14px;
+      font-size: 20px;
+      color: var(--dorado-claro);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .campo { text-align: left; }
+    .campo-completo { grid-column: 1 / -1; }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,.88);
+    }
+
+    input, select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 13px;
+      padding: 13px 12px;
+      font: inherit;
+      font-size: 16px;
+      color: #12251e;
+      background: #fff;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--dorado);
+      box-shadow: 0 0 0 3px rgba(212,175,55,.18);
+    }
+
+    .acciones {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    button, .boton {
+      border: 0;
+      border-radius: 13px;
+      padding: 13px 12px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 48px;
+    }
+
+    .primario {
+      background: linear-gradient(135deg, #d4af37, #f1d77c);
+      color: #173027;
+    }
+
+    .secundario {
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.18);
+    }
+
+    .whatsapp {
+      background: #25d366;
+      color: #083d21;
+    }
+
+    .peligro {
+      background: rgba(185, 55, 55, .18);
+      color: #ffd6d6;
+      border: 1px solid rgba(255, 145, 145, .25);
+    }
+
+    .estado {
+      min-height: 22px;
+      margin: 12px 0 0;
+      font-size: 13px;
+      color: var(--dorado-claro);
+      text-align: center;
+    }
+
+    .lista {
+      display: grid;
+      gap: 10px;
+    }
+
+    .persona {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding: 13px;
+      border-radius: 15px;
+      background: rgba(0,0,0,.17);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .persona strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .persona small {
+      color: rgba(255,255,255,.65);
+    }
+
+    .persona-acciones {
+      display: flex;
+      gap: 7px;
+    }
+
+    .persona-acciones button {
+      min-height: 39px;
+      padding: 9px 11px;
+      font-size: 12px;
+    }
+
+    .vacio {
+      text-align: center;
+      color: rgba(255,255,255,.65);
+      padding: 18px 8px;
+      border: 1px dashed rgba(255,255,255,.17);
+      border-radius: 14px;
+    }
+
+    .ayuda {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255,255,255,.72);
+      margin: 14px 0 0;
+    }
+
+    @media (max-width: 620px) {
+      .grid, .acciones { grid-template-columns: 1fr; }
+      .campo-completo { grid-column: auto; }
+      .panel { padding: 15px; border-radius: 18px; }
+      .persona { grid-template-columns: 1fr; }
+      .persona-acciones { display: grid; grid-template-columns: 1fr 1fr; }
+      .persona-acciones button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="contenedor">
+    <header class="cabecera">
+      <img class="logo" src="imag/logo-512.png.jpg" alt="Escudo de Gendarmería Nacional Argentina">
+      <h1>Generador de tarjetas</h1>
+      <p>Cargá la jerarquía y el nombre. Podés abrir, copiar o enviar por WhatsApp la tarjeta personalizada desde tu celular.</p>
+    </header>
+
+    <section class="panel">
+      <h2>Nueva tarjeta personalizada</h2>
+      <div class="grid">
+        <div class="campo">
+          <label for="jerarquia">Jerarquía</label>
+          <select id="jerarquia">
+            <option value="">Seleccionar jerarquía</option>
+            <option>Comandante Principal</option>
+            <option>Comandante</option>
+            <option>Segundo Comandante</option>
+            <option>Primer Alférez</option>
+            <option>Alférez</option>
+            <option>Subalférez</option>
+            <option>Suboficial Mayor</option>
+            <option>Suboficial Principal</option>
+            <option>Sargento Ayudante</option>
+            <option>Sargento Primero</option>
+            <option>Sargento</option>
+            <option>Cabo Primero</option>
+            <option>Cabo</option>
+            <option>Gendarme</option>
+            <option>Gendarme II</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="nombre">Nombre y apellido</label>
+          <input id="nombre" type="text" autocomplete="name" placeholder="Ej.: Diego Benítez">
+        </div>
+      </div>
+
+      <div class="acciones">
+        <button class="primario" id="abrir">Abrir tarjeta</button>
+        <button class="secundario" id="guardar">Guardar en la lista</button>
+        <button class="whatsapp" id="enviar">Enviar por WhatsApp</button>
+        <button class="secundario" id="copiar">Copiar enlace</button>
+      </div>
+
+      <div class="estado" id="estado" aria-live="polite"></div>
+      <p class="ayuda">El listado se guarda solamente en este teléfono mediante el almacenamiento del navegador. Para que los enlaces funcionen al enviarlos, el proyecto debe estar publicado en GitHub Pages, Firebase Hosting u otro hosting.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Personal guardado</h2>
+      <div class="lista" id="lista"></div>
+      <div class="acciones">
+        <button class="peligro" id="borrarTodo">Borrar todo el listado</button>
+        <a class="boton secundario" href="tarjeta-dia-gendarmeria.html?para=Al%20personal%20de%20la%20Secci%C3%B3n%20Gualeguay">Abrir tarjeta general</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const CLAVE = 'personalTarjetasGNA';
+    const jerarquia = document.getElementById('jerarquia');
+    const nombre = document.getElementById('nombre');
+    const estado = document.getElementById('estado');
+    const lista = document.getElementById('lista');
+
+    const normalizar = texto => texto.trim().replace(/\s+/g, ' ');
+
+    function obtenerDatos() {
+      const grado = normalizar(jerarquia.value);
+      const persona = normalizar(nombre.value);
+      if (!grado || !persona) {
+        mostrarEstado('Completá la jerarquía y el nombre.');
+        return null;
+      }
+      return { jerarquia: grado, nombre: persona };
+    }
+
+    function crearUrl(datos) {
+      const url = new URL('tarjeta-dia-gendarmeria.html', window.location.href);
+      url.searchParams.set('jerarquia', datos.jerarquia);
+      url.searchParams.set('nombre', datos.nombre);
+      return url.href;
+    }
+
+    function mostrarEstado(texto) {
+      estado.textContent = texto;
+      window.clearTimeout(mostrarEstado.timer);
+      mostrarEstado.timer = window.setTimeout(() => estado.textContent = '', 3500);
+    }
+
+    function leerPersonal() {
+      try {
+        return JSON.parse(localStorage.getItem(CLAVE)) || [];
+      } catch {
+        return [];
+      }
+    }
+
+    function guardarPersonal(personal) {
+      localStorage.setItem(CLAVE, JSON.stringify(personal));
+      renderizar();
+    }
+
+    function agregarPersona() {
+      const datos = obtenerDatos();
+      if (!datos) return;
+      const personal = leerPersonal();
+      const yaExiste = personal.some(item =>
+        item.jerarquia.toLowerCase() === datos.jerarquia.toLowerCase() &&
+        item.nombre.toLowerCase() === datos.nombre.toLowerCase()
+      );
+      if (yaExiste) {
+        mostrarEstado('Esa persona ya está guardada.');
+        return;
+      }
+      personal.push(datos);
+      personal.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+      guardarPersonal(personal);
+      mostrarEstado('Persona guardada correctamente.');
+    }
+
+    function abrirTarjeta(datos = obtenerDatos()) {
+      if (!datos) return;
+      window.open(crearUrl(datos), '_blank');
+    }
+
+    async function copiarEnlace(datos = obtenerDatos()) {
+      if (!datos) return;
+      const url = crearUrl(datos);
+      try {
+        await navigator.clipboard.writeText(url);
+        mostrarEstado('Enlace copiado.');
+      } catch {
+        const auxiliar = document.createElement('textarea');
+        auxiliar.value = url;
+        document.body.appendChild(auxiliar);
+        auxiliar.select();
+        document.execCommand('copy');
+        auxiliar.remove();
+        mostrarEstado('Enlace copiado.');
+      }
+    }
+
+    function enviarWhatsApp(datos = obtenerDatos()) {
+      if (!datos) return;
+      const url = crearUrl(datos);
+      const texto = `¡Feliz Día de la Gendarmería, ${datos.jerarquia} ${datos.nombre}!\n\nTe envío esta tarjeta institucional personalizada:\n${url}`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`, '_blank');
+    }
+
+    function cargarPersona(datos) {
+      jerarquia.value = datos.jerarquia;
+      nombre.value = datos.nombre;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      mostrarEstado('Datos cargados. Ya podés abrir o enviar la tarjeta.');
+    }
+
+    function eliminarPersona(indice) {
+      const personal = leerPersonal();
+      personal.splice(indice, 1);
+      guardarPersonal(personal);
+      mostrarEstado('Persona eliminada del listado.');
+    }
+
+    function renderizar() {
+      const personal = leerPersonal();
+      lista.innerHTML = '';
+
+      if (!personal.length) {
+        lista.innerHTML = '<div class="vacio">Todavía no guardaste personal.</div>';
+        return;
+      }
+
+      personal.forEach((item, indice) => {
+        const fila = document.createElement('article');
+        fila.className = 'persona';
+
+        const datos = document.createElement('div');
+        const titulo = document.createElement('strong');
+        titulo.textContent = `${item.jerarquia} ${item.nombre}`;
+        const detalle = document.createElement('small');
+        detalle.textContent = 'Tarjeta personalizada';
+        datos.append(titulo, detalle);
+
+        const acciones = document.createElement('div');
+        acciones.className = 'persona-acciones';
+
+        const abrir = document.createElement('button');
+        abrir.className = 'primario';
+        abrir.textContent = 'Abrir';
+        abrir.addEventListener('click', () => abrirTarjeta(item));
+
+        const whatsapp = document.createElement('button');
+        whatsapp.className = 'whatsapp';
+        whatsapp.textContent = 'WhatsApp';
+        whatsapp.addEventListener('click', () => enviarWhatsApp(item));
+
+        const cargar = document.createElement('button');
+        cargar.className = 'secundario';
+        cargar.textContent = 'Editar';
+        cargar.addEventListener('click', () => cargarPersona(item));
+
+        const eliminar = document.createElement('button');
+        eliminar.className = 'peligro';
+        eliminar.textContent = 'Eliminar';
+        eliminar.addEventListener('click', () => eliminarPersona(indice));
+
+        acciones.append(abrir, whatsapp, cargar, eliminar);
+        fila.append(datos, acciones);
+        lista.appendChild(fila);
+      });
+    }
+
+    document.getElementById('abrir').addEventListener('click', () => abrirTarjeta());
+    document.getElementById('guardar').addEventListener('click', agregarPersona);
+    document.getElementById('enviar').addEventListener('click', () => enviarWhatsApp());
+    document.getElementById('copiar').addEventListener('click', () => copiarEnlace());
+    document.getElementById('borrarTodo').addEventListener('click', () => {
+      if (confirm('¿Querés borrar todo el listado guardado en este teléfono?')) {
+        localStorage.removeItem(CLAVE);
+        renderizar();
+        mostrarEstado('Listado eliminado.');
+      }
+    });
+
+    nombre.addEventListener('keydown', evento => {
+      if (evento.key === 'Enter') abrirTarjeta();
+    });
+
+    renderizar();
+  </script>
+</body>
+</html>
